@@ -13,5 +13,22 @@ UCLASS()
 class ACPlayerCharacter : public ACCharacter
 {
 	GENERATED_BODY()
+public:
+	ACPlayerCharacter();
+	virtual void PawnClientRestart() override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+private:
+	UPROPERTY(VisibleDefaultsOnly, Category = "View")
+	class USpringArmComponent* CameraBoom;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "View")
+	class UCameraComponent* ViewCam;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputAction* JumpInputAction;
+	 
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	class UInputMappingContext* GameplayInputMappingContext;
 	
 };
