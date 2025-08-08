@@ -41,19 +41,33 @@ public:
 	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
 	FORCEINLINE float GetSmoothedYawSpeed() const { return SmoothedYawSpeed; }
 
+	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
+	FORCEINLINE bool GetIsJumping() const { return bIsJumping; }
+
+	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
+	FORCEINLINE bool GetIsOnGround() const { return !bIsJumping; }
+
+	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
+	FORCEINLINE float GetLookYawOffset() const { return LookRotOffset.Yaw; }
+
+	UFUNCTION(BlueprintCallable, meta=(BlueprintThreadSafe))
+	FORCEINLINE float GetLookPitchOffset() const { return LookRotOffset.Pitch; }
+
 private:
 
 	UPROPERTY()
 	class ACharacter* OwnerPlayerCharacter;
-	UPROPERTY()
+	UPROPERTY()  
 	class UCharacterMovementComponent* OwnerMovementComp;
 	
 	float Speed;
 	float YawSpeed;
 	float SmoothedYawSpeed;
+	bool bIsJumping;
 
 	UPROPERTY(EditAnywhere, Category = "Animation")
-	float YawSpeedSmothLerpSpeed = 1.f;
+	float YawSpeedSmoothLerpSpeed = 1.f;
 
 	FRotator BodyPrevRot;
+	FRotator LookRotOffset;
 };
