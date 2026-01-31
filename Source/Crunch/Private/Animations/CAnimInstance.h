@@ -56,7 +56,7 @@ public:
 private:
 
 	UPROPERTY()
-	class ACharacter* OwnerPlayerCharacter;
+	class ACharacter* OwnerCharacter;
 	UPROPERTY()  
 	class UCharacterMovementComponent* OwnerMovementComp;
 	

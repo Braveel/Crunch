@@ -10,10 +10,10 @@
 
 void UCAnimInstance::NativeInitializeAnimation()
 {
-	OwnerPlayerCharacter = Cast<ACharacter>(TryGetPawnOwner());
-	if (OwnerPlayerCharacter)
+	OwnerCharacter = Cast<ACharacter>(TryGetPawnOwner());
+	if (OwnerCharacter)
 	{
-		OwnerMovementComp = OwnerPlayerCharacter->GetCharacterMovement();
+		OwnerMovementComp = OwnerCharacter->GetCharacterMovement();
 	}
 	else
 	{
@@ -23,17 +23,17 @@ void UCAnimInstance::NativeInitializeAnimation()
 
 void UCAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
-	if (OwnerPlayerCharacter)
+	if (OwnerCharacter)
 	{
-		Speed = OwnerPlayerCharacter->GetVelocity().Length();
-		FRotator BodyRot = OwnerPlayerCharacter->GetActorRotation();
+		Speed = OwnerCharacter->GetVelocity().Length();
+		FRotator BodyRot = OwnerCharacter->GetActorRotation();
 		FRotator BodyRotDelta = UKismetMathLibrary::NormalizedDeltaRotator(BodyRot, BodyPrevRot);
 		BodyPrevRot = BodyRot;
 
 		YawSpeed = BodyRotDelta.Yaw / DeltaSeconds;
 		SmoothedYawSpeed = UKismetMathLibrary::FInterpTo(SmoothedYawSpeed, YawSpeed, DeltaSeconds, YawSpeedSmoothLerpSpeed);
 
-		FRotator ControlRot = OwnerPlayerCharacter->GetControlRotation();
+		FRotator ControlRot = OwnerCharacter->GetControlRotation();
 		LookRotOffset = UKismetMathLibrary::NormalizedDeltaRotator(ControlRot, BodyRot);
 	}
 
